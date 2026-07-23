@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email Automation</title>
+
+<style>
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f6f9;
+    margin:0;
+    padding:20px;
+}
+.container{
+    max-width:650px;
+    margin:auto;
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+}
+h2{
+    text-align:center;
+    color:#1565c0;
+}
+label{
+    font-weight:bold;
+    margin-top:15px;
+    display:block;
+}
+input,select,textarea{
+    width:100%;
+    padding:12px;
+    margin-top:5px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    box-sizing:border-box;
+}
+textarea{
+    height:220px;
+}
+button{
+    width:100%;
+    margin-top:20px;
+    background:#1565c0;
+    color:white;
+    border:none;
+    padding:15px;
+    border-radius:10px;
+    font-size:18px;
+    cursor:pointer;
+}
+button:hover{
+    background:#0d47a1;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h2>📧 Email Automation</h2>
+
+<label>Email To</label>
+<input type="email" id="to" placeholder="example@email.com">
+
+<label>Template</label>
+
+<select id="template" onchange="changeTemplate()">
+
+<option value="job">Job Application</option>
+
+</select>
+
+<label>Subject</label>
+
+<input id="subject">
+
+<label>Body</label>
+
+<textarea id="body"></textarea>
+
+<button onclick="sendEmail()">📨 Send Email</button>
+
+</div>
+
+<script>
+
+const templates={
+
+job:{
+subject:"Application for Data Analyst / Power BI Developer",
+body:`Dear HR Team  
+
+Greetings 
+
+I Hope you’re doing well 
+
+I am writing to express my interest in the position of[Power BI Developer / Data Analyst ] .
+
+My qualifications, skills, and experience align closely with requirements for this role.
+
+Please find my CV and supporting documents attached for your review. 
+I would be delighted to discuss how I can contribute to your team and look forward to
+ hearing from you soon about this exciting opportunity.  
+
+Best wishes,
+
+
+Portfolio:- https://sanikhatir-sketch.github.io/Eisa/Mohammed_Ahmed.html
+
+Note : start immediately
+
+
+Mohammed Ahmed`
+},
+
+}
+
+function changeTemplate(){
+
+let t=document.getElementById("template").value;
+
+document.getElementById("subject").value=templates[t].subject;
+
+document.getElementById("body").value=templates[t].body;
+
+}
+
+changeTemplate();
+
+function sendEmail(){
+
+let to=document.getElementById("to").value;
+
+let subject=encodeURIComponent(document.getElementById("subject").value);
+
+let body=encodeURIComponent(document.getElementById("body").value);
+
+window.location.href=`mailto:${to}?subject=${subject}&body=${body}`;
+
+}
+
+
+</script>
+
+</body>
+
+</html>
