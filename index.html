@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Career Mail Studio</title>
+<style>
+:root{--bg:#07111f;--panel:#0e1b2d;--panel2:#12243a;--line:#263b55;--text:#eaf2ff;--muted:#9db0ca;--accent:#57d5ff;--accent2:#8b7cff;--green:#39d98a}
+*{box-sizing:border-box}body{margin:0;font:15px/1.55 Inter,Segoe UI,Arial,sans-serif;color:var(--text);background:radial-gradient(ellipse at 15% 0,#15365b 0,transparent 40%),linear-gradient(135deg,#050b14,#091525 55%,#0a1020);min-height:100vh;padding:28px}
+.wrap{max-width:1200px;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:24px;flex-wrap:wrap}.brand{display:flex;align-items:center;gap:13px}.logo{width:48px;height:48px;border-radius:15px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;color:#06111d;font-size:24px;box-shadow:0 8px 25px #57d5ff35}.brand h1{margin:0;font-size:clamp(22px,3vw,30px);letter-spacing:-.7px}.brand p{margin:3px 0 0;color:var(--muted)}.chip{border:1px solid #2d4966;background:#10243a;color:#b9d6f5;padding:8px 13px;border-radius:99px;font-size:12px}
+.layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);gap:20px}.card{background:linear-gradient(180deg,#102038ed,#0c192bed);border:1px solid #263d58;border-radius:22px;padding:23px;box-shadow:0 20px 55px #0003;min-width:0}.card h2{font-size:18px;margin:0 0 5px}.sub{color:var(--muted);font-size:13px;margin:0 0 20px}
+label{display:block;font-size:13px;font-weight:650;color:#c9d9ed;margin:14px 0 7px}input,select,textarea{width:100%;background:#071321;color:var(--text);border:1px solid #2b435e;border-radius:11px;padding:12px 13px;font:inherit;outline:none;transition:.2s}input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px #57d5ff18}textarea{min-height:270px;resize:vertical;line-height:1.6}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:17px}.btn{border:0;border-radius:11px;padding:12px 16px;font-weight:700;cursor:pointer;transition:.18s}.primary{background:linear-gradient(135deg,var(--accent),#8bbdff);color:#061321;box-shadow:0 7px 20px #57d5ff22}.secondary{background:#1a2e47;color:#dceaff;border:1px solid #314b69}.btn:hover{transform:translateY(-1px);filter:brightness(1.08)}.files{border:1px dashed #3c5878;border-radius:14px;padding:16px;background:#091626}.file-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.filelist{display:grid;gap:8px;margin-top:12px}.fileitem{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#13263d;border:1px solid #2a415e;border-radius:10px;padding:10px 12px;font-size:13px}.fileitem span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.small{font-size:12px;color:var(--muted)}.preview{position:sticky;top:20px}.previewhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}.previewbox{background:#f7f9fc;color:#19283b;border-radius:15px;min-height:450px;overflow:hidden}.previewbar{padding:12px 15px;background:#e9eef5;color:#4d617b;font-size:12px;border-bottom:1px solid #d6dfeb}.previewcontent{padding:22px;white-space:pre-wrap;overflow-wrap:anywhere;font-family:Arial,sans-serif}.previewcontent h3{margin-top:0}.empty{display:grid;place-items:center;text-align:center;padding:50px 20px;color:#65768b}.notice{margin-top:14px;color:#a8c4e2;font-size:12px}.footer{text-align:center;color:#7890ad;font-size:12px;margin-top:22px}
+@media(max-width:850px){body{padding:15px}.layout{grid-template-columns:1fr}.preview{position:static}.row{grid-template-columns:1fr}.card{padding:18px}}
+</style>
+</head>
+<body><div class="wrap">
+<header class="top"><div class="brand"><div class="logo">✉</div><div><h1>Career Mail Studio</h1><p>Prepare a polished job application in minutes</p></div></div><span class="chip">LOCAL • PRIVATE • NO UPLOAD</span></header>
+<div class="layout">
+<section class="card">
+<h2>Compose application</h2><p class="sub">Choose a template, customize your message, and attach your documents.</p>
+<label for="to">Recipient email</label><input id="to" type="email" placeholder="hr@company.com">
+<div class="row"><div><label for="template">Email template</label><select id="template">
+<option value="job">General Job Application</option><option value="BusinessIntelligence">Business Intelligence</option><option value="DataAnalyst">Data Analyst</option><option value="PowerBIDeveloper">Power BI Developer</option><option value="StoreKeeper">Store Keeper</option><option value="DocumentController">Document Controller</option></select></div><div><label for="subject">Subject</label><input id="subject"></div></div>
+<label for="body">Message</label><textarea id="body" spellcheck="true"></textarea>
+<label>Attachments (PDF / Word)</label><div class="files"><input id="attachments" type="file" multiple accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+<div class="small">Select your CV, certificates, or supporting documents. Files stay on this device.</div><div id="filelist" class="filelist"></div></div>
+<div class="btns"><button class="btn primary" id="send">✉ Open email app</button><button class="btn secondary" id="copy">Copy message</button><button class="btn secondary" id="clear">Clear files</button></div>
+<p class="notice">Note: mailto opens your email application. Browsers cannot attach selected files automatically; attach them in the email window manually.</p>
+</section>
+<aside class="card preview"><div class="previewhead"><div><h2>Live preview</h2><p class="sub" style="margin:3px 0">Your message as it will read</p></div><span class="chip">LIVE</span></div>
+<div class="previewbox"><div class="previewbar">MESSAGE PREVIEW · <span id="previewSubject">Subject</span></div><div id="preview" class="previewcontent"></div></div>
+<div class="small" style="margin-top:12px">Preview updates as you type. Attachments are listed separately.</div></aside>
+</div><div class="footer">Career Mail Studio · A lightweight single-file email helper</div></div>
+<script>
+const templates={
+job:{subject:"Data Analyst / Power BI Developer",body:`Dear HR Team,
+
+I hope you are doing well.
+
+I am writing to express my interest in the position of [Job Title]. My qualifications, skills, and experience align closely with the requirements for this role.
+
+Please find my CV and supporting documents attached for your review. I would be delighted to discuss how I can contribute to your team and look forward to hearing from you.
+
+Best regards,
+
+Mohammed Ahmed
+Portfolio: https://sanikhatir-sketch.github.io/Eisa/Mohammed_Ahmed.html
+Availability: Immediately`},
+BusinessIntelligence:{subject:"Business Intelligence",body:`Dear HR Team,
+
+I hope you are doing well.
+
+I am writing to express my interest in the Business Intelligence position. My qualifications, skills, and experience align closely with the requirements for this role.
+
+Please find my CV and supporting documents attached for your review. I would be delighted to discuss how I can contribute to your team.
+
+Best regards,
+
+Mohammed Ahmed
+Portfolio: https://sanikhatir-sketch.github.io/Eisa/Mohammed_Ahmed.html
+Availability: Immediately`},
+DataAnalyst:{subject:"Data Analyst",body:`Dear HR Team,
+
+I hope you are doing well.
+
+I am writing to express my interest in the Data Analyst position. My qualifications, skills, and experience align closely with the requirements for this role.
+
+Please find my CV and supporting documents attached for your review. I would be delighted to discuss how I can contribute to your team.
+
+Best regards,
+
+Mohammed Ahmed
+Portfolio: https://sanikhatir-sketch.github.io/Eisa/Mohammed_Ahmed.html
+Availability: Immediately`},
+PowerBIDeveloper:{subject:"Power BI Developer",body:`Dear HR Team,
+
+I hope you are doing well.
+
+I am writing to express my interest in the Power BI Developer position. My qualifications, skills, and experience align closely with the requirements for this role.
+
+Please find my CV and supporting documents attached for your review. I would be delighted to discuss how I can contribute to your team.
+
+Best regards,
+
+Mohammed Ahmed
+Portfolio: https://sanikhatir-sketch.github.io/Eisa/Mohammed_Ahmed.html
+Availability: Immediately`},
+StoreKeeper:{subject:"Store Keeper",body:`Dear HR Team,
+
+I hope you are doing well.
+
+I am writing to express my interest in the Store Keeper position. My qualifications, skills, and experience align closely with the requirements for this role.
+
+Please find my CV and supporting documents attached for your review. I would be delighted to discuss how I can contribute to your team.
+
+Best regards,
+
+Mohammed Ahmed
+Availability: Immediately`},
+DocumentController:{subject:"Document Controller",body:`Dear HR Team,
+
+I hope you are doing well.
+
+I am writing to express my interest in the Document Controller position. My qualifications, skills, and experience align closely with the requirements for this role.
+
+Please find my CV and supporting documents attached for your review. I would be delighted to discuss how I can contribute to your team.
+
+Best regards,
+
+Mohammed Ahmed
+Availability: Immediately`}
+};
+const $=id=>document.getElementById(id);
+function loadTemplate(){let t=templates[$("template").value];$("subject").value=t.subject;$("body").value=t.body;updatePreview()}
+function updatePreview(){$("previewSubject").textContent=$("subject").value||"Subject";$("preview").textContent=$("body").value||"Your message will appear here…"}
+$("template").addEventListener("change",loadTemplate);$("subject").addEventListener("input",updatePreview);$("body").addEventListener("input",updatePreview);
+$("attachments").addEventListener("change",()=>{const files=[...$("attachments").files];$("filelist").innerHTML=files.length?files.map(f=>`<div class="fileitem"><span>📎 ${escapeHtml(f.name)} <small>(${formatSize(f.size)})</small></span><strong>${f.name.toLowerCase().endsWith(".pdf")?"PDF":"Word"}</strong></div>`).join(""):"";});
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function formatSize(n){return n<1024?n+" B":n<1048576?(n/1024).toFixed(1)+" KB":(n/1048576).toFixed(1)+" MB"}
+$("send").onclick=()=>{const to=$("to").value.trim();if(to&&!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(to)){alert("Please enter a valid email address.");return}const url=`mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent($("subject").value)}&body=${encodeURIComponent($("body").value)}`;window.location.href=url};
+$("copy").onclick=async()=>{try{await navigator.clipboard.writeText("Subject: "+$("subject").value+"\\n\\n"+$("body").value);alert("Message copied.")}catch{alert("Copy is not available in this browser. Select and copy the message manually.")}};
+$("clear").onclick=()=>{$("attachments").value="";$("filelist").innerHTML="";};
+loadTemplate();
+</script></body></html>
