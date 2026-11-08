@@ -23,7 +23,9 @@ label{display:block;font-size:13px;font-weight:650;color:#c9d9ed;margin:14px 0 7
 <label for="body">Message</label><textarea id="body" spellcheck="true"></textarea>
 <label>Attachments (PDF / Word)</label><div class="files"><input id="attachments" type="file" multiple accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
 <div class="small">Select your CV, certificates, or supporting documents. Files stay on this device.</div><div id="filelist" class="filelist"></div></div>
-<div class="btns"><button class="btn primary" id="send">✉ Open email app</button><button class="btn secondary" id="copy">Copy message</button><button class="btn secondary" id="clear">Clear files</button></div>
+<div class="btns"><button class="btn secondary" id="send" type="button">
+  📨 Open email app
+</button><button class="btn secondary" id="copy">Copy message</button><button class="btn secondary" id="clear">Clear files</button></div>
 <p class="notice">Note: mailto opens your email application. Browsers cannot attach selected files automatically; attach them in the email window manually.</p>
 </section>
 <aside class="card preview"><div class="previewhead"><div><h2>Live preview</h2><p class="sub" style="margin:3px 0">Your message as it will read</p></div><span class="chip">LIVE</span></div>
@@ -116,7 +118,18 @@ $("template").addEventListener("change",loadTemplate);$("subject").addEventListe
 $("attachments").addEventListener("change",()=>{const files=[...$("attachments").files];$("filelist").innerHTML=files.length?files.map(f=>`<div class="fileitem"><span>📎 ${escapeHtml(f.name)} <small>(${formatSize(f.size)})</small></span><strong>${f.name.toLowerCase().endsWith(".pdf")?"PDF":"Word"}</strong></div>`).join(""):"";});
 function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function formatSize(n){return n<1024?n+" B":n<1048576?(n/1024).toFixed(1)+" KB":(n/1048576).toFixed(1)+" MB"}
-$("send").onclick=()=>{const to=$("to").value.trim();if(to&&!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(to)){alert("Please enter a valid email address.");return}const url=`mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent($("subject").value)}&body=${encodeURIComponent($("body").value)}`;window.location.href=url};
+$("send").onclick = () => {
+    const to = $("to").value.trim();
+
+    if (!to || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to)) {
+        alert("Please enter a valid email address.");
+        return;
+    }
+
+    const url = `mailto:${to}?subject=${encodeURIComponent($("subject").value)}&body=${encodeURIComponent($("body").value)}`;
+
+    window.location.href = url;
+};
 $("copy").onclick=async()=>{try{await navigator.clipboard.writeText("Subject: "+$("subject").value+"\\n\\n"+$("body").value);alert("Message copied.")}catch{alert("Copy is not available in this browser. Select and copy the message manually.")}};
 $("clear").onclick=()=>{$("attachments").value="";$("filelist").innerHTML="";};
 loadTemplate();
